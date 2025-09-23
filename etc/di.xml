@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Inventories -->
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\InventoryInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\Inventory"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\InventoryRepositoryInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\InventoryRepository"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\InventorySearchResultsInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\InventorySearchResults"/>
+
+    <!-- Order -->
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\OrderInformationInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\OrderInformation"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\AddressInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\Order\Address"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\OrderItemInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\Order\OrderItem"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\ShippingInformationInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\Order\ShippingInformation"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\TaxInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\Order\Tax"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\TotalsInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\Order\Totals"/>
+
+    <preference for="M2E\M2ECloudMagentoConnector\Api\OrderManagementInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\OrderManagement"/>
+
+    <!-- Module list info -->
+    <preference for="M2E\M2ECloudMagentoConnector\Api\ModuleInfoInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\ModuleInfoProvider"/>
+</config>

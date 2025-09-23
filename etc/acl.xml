@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="M2E_M2ECloudMagentoConnector::integration" title="M2E Cloud Connector" sortOrder="31">
+                    <resource id="M2E_M2ECloudMagentoConnector::inventories" title="Inventory list" sortOrder="10"/>
+                    <resource id="M2E_M2ECloudMagentoConnector::create_order" title="Create Orders" sortOrder="20"/>
+                    <resource id="M2E_M2ECloudMagentoConnector::module_info" title="Module info" sortOrder="30"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
