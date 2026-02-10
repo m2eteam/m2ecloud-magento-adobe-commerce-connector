@@ -12,17 +12,20 @@ class Builder
     private \M2E\M2ECloudMagentoConnector\Model\Order\MagentoProcessor\InvoiceCreate $invoiceCreate;
     private \M2E\M2ECloudMagentoConnector\Model\Order\MagentoProcessor\OrderSubmit $orderSubmit;
     private MagentoProcessor\ShipmentCreate $shipmentCreate;
+    private \Magento\Sales\Api\Data\OrderExtensionFactory $orderExtensionFactory;
 
     public function __construct(
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
         \M2E\M2ECloudMagentoConnector\Model\Order\MagentoProcessor\InvoiceCreate $invoiceCreate,
         \M2E\M2ECloudMagentoConnector\Model\Order\MagentoProcessor\OrderSubmit $orderSubmit,
-        \M2E\M2ECloudMagentoConnector\Model\Order\MagentoProcessor\ShipmentCreate $shipmentCreate
+        \M2E\M2ECloudMagentoConnector\Model\Order\MagentoProcessor\ShipmentCreate $shipmentCreate,
+        \Magento\Sales\Api\Data\OrderExtensionFactory $orderExtensionFactory
     ) {
         $this->orderRepository = $orderRepository;
         $this->invoiceCreate = $invoiceCreate;
         $this->orderSubmit = $orderSubmit;
         $this->shipmentCreate = $shipmentCreate;
+        $this->orderExtensionFactory = $orderExtensionFactory;
     }
 
     public function processOrder(
@@ -39,10 +42,7 @@ class Builder
             );
         }
 
-        /** @psalm-suppress UndefinedInterfaceMethod */
-        $this->orderRepository->_resetState();
         $order = $this->orderRepository->get($order->getEntityId());
-
         if (isset($shippingId)) {
             $this->addOrderExtensionAttributes($order, $shippingId);
         }
@@ -53,6 +53,10 @@ class Builder
     private function addOrderExtensionAttributes(OrderInterface $order, int $shippingId)
     {
         $extensionAttributes = $order->getExtensionAttributes();
+        if ($extensionAttributes === null) {
+            $extensionAttributes = $this->orderExtensionFactory->create();
+        }
+
         $extensionAttributes->setShipmentId($shippingId);
         $order->setExtensionAttributes($extensionAttributes);
     }
