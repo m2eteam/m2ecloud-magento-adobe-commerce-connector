@@ -30,4 +30,12 @@
     <!-- Module list info -->
     <preference for="M2E\M2ECloudMagentoConnector\Api\ModuleInfoInterface"
                 type="M2E\M2ECloudMagentoConnector\Model\ModuleInfoProvider"/>
+    <type name="M2E\M2ECloudMagentoConnector\Model\ModuleInfoProvider">
+        <arguments>
+            <argument name="extensionList" xsi:type="array">
+                <item name="m2e_cloudMagentoConnector" xsi:type="object">M2E\M2ECloudMagentoConnector\Model\Extension</item>
+                <item name="magento2" xsi:type="object">M2E\M2ECloudMagentoConnector\Model\Magento\Info</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

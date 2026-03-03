@@ -298,6 +298,17 @@ class Builder
 
     private function prepareOrderNumber()
     {
+        if ($this->proxyOrder->getMagentoOrderNumber()) {
+            $orderNumber = $this->proxyOrder->getMagentoOrderNumber();
+            if ($this->orderIncrementIdChecker->isIncrementIdUsed($orderNumber)) {
+                $orderNumber .= '(1)';
+            }
+
+            $this->quote->setReservedOrderId($orderNumber);
+
+            return;
+        }
+
         $orderNumber = $this->quote->getReservedOrderId();
         empty($orderNumber) && $orderNumber = $this->quote->getResource()->getReservedOrderId($this->quote);
 

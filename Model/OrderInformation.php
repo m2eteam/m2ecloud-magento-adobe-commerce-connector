@@ -107,6 +107,22 @@ class OrderInformation extends \Magento\Framework\DataObject implements OrderInf
     /**
      * {@inheritdoc}
      */
+    public function getMagentoOrderId()
+    {
+        return $this->getData(self::MAGENTO_ORDER_ID);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMagentoOrderId($magentoOrderId)
+    {
+        return $this->setData(self::MAGENTO_ORDER_ID, $magentoOrderId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setShippingInformation(
         \M2E\M2ECloudMagentoConnector\Api\Data\ShippingInformationInterface $shippingInformation
     ) {

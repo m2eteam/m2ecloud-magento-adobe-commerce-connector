@@ -11,6 +11,7 @@ interface OrderInformationInterface
     public const BILLING_ADDRESS = 'billing_address';
     public const STORE_VIEW_CODE = 'store_view_code';
     public const CURRENCY = 'currency';
+    public const MAGENTO_ORDER_ID = 'magento_order_id';
     public const CHANNEL_ORDER_ID = 'channel_order_id';
     public const SHIPPING_INFORMATION = 'shipping_information';
     public const TAX = 'tax';
@@ -90,6 +91,21 @@ interface OrderInformationInterface
      * @return $this
      */
     public function setCurrency($currency);
+
+    /**
+     * Returns order id for magento
+     * @return string|null
+     */
+    public function getMagentoOrderId();
+
+    /**
+     * Set order id for magento
+     *
+     * @param string $magentoOrderId
+     *
+     * @return $this
+     */
+    public function setMagentoOrderId($magentoOrderId);
 
     /**
      * Returns channel order id

@@ -100,6 +100,11 @@ class ProxyObject
         return $this->orderInformation->getChannelOrderId();
     }
 
+    public function getMagentoOrderNumber(): ?string
+    {
+        return $this->orderInformation->getMagentoOrderId();
+    }
+
     public function getCustomerFirstName()
     {
         return $this->orderInformation->getShippingAddress()->getFirstname();
