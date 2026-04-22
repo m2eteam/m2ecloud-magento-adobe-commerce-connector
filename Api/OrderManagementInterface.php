@@ -11,7 +11,7 @@ interface OrderManagementInterface
      *
      * @param \M2E\M2ECloudMagentoConnector\Api\Data\OrderInformationInterface $orderInformation
      *
-     * @return \Magento\Sales\Api\Data\OrderInterface
+     * @return \M2E\M2ECloudMagentoConnector\Api\Data\OrderCreateResponseInterface
      * @api
      */
     public function createOrder(\M2E\M2ECloudMagentoConnector\Api\Data\OrderInformationInterface $orderInformation);

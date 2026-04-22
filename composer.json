@@ -2,7 +2,7 @@
     "name" : "m2e/m2ecloud-magento-adobe-commerce-connector",
     "description" : "M2E Cloud Magento Adobe Commerce Connector",
     "type" : "magento2-module",
-    "version" : "2.1.0",
+    "version" : "2.2.0",
     "license" : "proprietary",
     "keywords" : [
         "magento",

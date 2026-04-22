@@ -6,35 +6,37 @@ namespace M2E\M2ECloudMagentoConnector\Model;
 
 class OrderManagement implements \M2E\M2ECloudMagentoConnector\Api\OrderManagementInterface
 {
+    private \M2E\M2ECloudMagentoConnector\Model\Order\CreateResponseFactory $responseFactory;
     private \M2E\M2ECloudMagentoConnector\Model\Order\Builder $orderBuilder;
     private \Psr\Log\LoggerInterface $logger;
 
     public function __construct(
+        \M2E\M2ECloudMagentoConnector\Model\Order\CreateResponseFactory $responseFactory,
         \M2E\M2ECloudMagentoConnector\Model\Order\Builder $orderBuilder,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->orderBuilder = $orderBuilder;
         $this->logger = $logger;
+        $this->responseFactory = $responseFactory;
     }
 
     /**
      * @inheirtDoc
-     * @throws \Exception
      */
     public function createOrder(\M2E\M2ECloudMagentoConnector\Api\Data\OrderInformationInterface $orderInformation)
     {
+        $response = $this->responseFactory->create();
         try {
-            $order = $this->orderBuilder->processOrder($orderInformation);
+            $orderId = $this->orderBuilder->processOrder($orderInformation);
+            $response->setEntityId($orderId);
         } catch (\Throwable $e) {
-            $exceptionMessage = 'Error while creating order: ' . $e->getMessage();
             $this->logger->error(
-                $exceptionMessage,
+                'Error while creating order: ' . $e->getMessage(),
                 ['exception' => $e->getTraceAsString()]
             );
-
-            throw new \Exception($exceptionMessage, $e->getCode(), $e);
+            $response->setError($e->getMessage());
         }
 
-        return $order;
+        return $response;
     }
 }

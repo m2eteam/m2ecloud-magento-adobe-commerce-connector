@@ -23,6 +23,8 @@
                 type="M2E\M2ECloudMagentoConnector\Model\Order\Tax"/>
     <preference for="M2E\M2ECloudMagentoConnector\Api\Data\TotalsInterface"
                 type="M2E\M2ECloudMagentoConnector\Model\Order\Totals"/>
+    <preference for="M2E\M2ECloudMagentoConnector\Api\Data\OrderCreateResponseInterface"
+                type="M2E\M2ECloudMagentoConnector\Model\Order\CreateResponse"/>
 
     <preference for="M2E\M2ECloudMagentoConnector\Api\OrderManagementInterface"
                 type="M2E\M2ECloudMagentoConnector\Model\OrderManagement"/>
