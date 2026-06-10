@@ -155,4 +155,20 @@ interface AddressInterface
      * @return $this
      */
     public function setEmail($email);
+
+    /**
+     * Get company
+
+     * @return string
+     */
+    public function getCompany();
+
+    /**
+     * Set company
+     *
+     * @param string $company
+     *
+     * @return $this
+     */
+    public function setCompany($company);
 }

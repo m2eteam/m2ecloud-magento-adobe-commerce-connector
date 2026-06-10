@@ -140,6 +140,9 @@ class ProxyObject
             $this->shippingAddressData['postcode'] = $shippingAddress->getPostcode();
             $this->shippingAddressData['telephone'] = $shippingAddress->getTelephone();
             $this->shippingAddressData['street'] = $shippingAddress->getStreet();
+            $this->shippingAddressData['company'] = !empty($shippingAddress->getCompany())
+                ? $shippingAddress->getCompany()
+                : '';
             $this->shippingAddressData['save_in_address_book'] = 0;
         }
 
@@ -149,7 +152,7 @@ class ProxyObject
     public function getBillingAddressData(): array
     {
         if (empty($this->billingAddressData)) {
-            $billingAddress = $this->orderInformation->getShippingAddress();
+            $billingAddress = $this->orderInformation->getBillingAddress();
             $this->billingAddressData['firstname'] = $billingAddress->getFirstname();
             $this->billingAddressData['lastname'] = $billingAddress->getLastname();
             $this->billingAddressData['email'] = $billingAddress->getEmail();
@@ -163,6 +166,9 @@ class ProxyObject
             $this->billingAddressData['postcode'] = $billingAddress->getPostcode();
             $this->billingAddressData['telephone'] = $billingAddress->getTelephone();
             $this->billingAddressData['street'] = $billingAddress->getStreet();
+            $this->billingAddressData['company'] = !empty($billingAddress->getCompany())
+                ? $billingAddress->getCompany()
+                : '';
             $this->billingAddressData['save_in_address_book'] = 0;
         }
 
