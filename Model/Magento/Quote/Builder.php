@@ -21,6 +21,7 @@ class Builder
     private \M2E\M2ECloudMagentoConnector\Model\Magento\Quote\Store\ConfiguratorFactory $configuratorFactory;
     private \M2E\M2ECloudMagentoConnector\Helper\Data\GlobalData $globalDataHelper;
     private \M2E\M2ECloudMagentoConnector\Model\Magento\Quote\ItemFactory $magentoQuoteItemFactory;
+    private \M2E\M2ECloudMagentoConnector\Model\Magento\Quote\CustomerFinder $customerFinder;
 
     public function __construct(
         \M2E\M2ECloudMagentoConnector\Model\Order\ProxyObject $proxyOrder,
@@ -32,7 +33,8 @@ class Builder
         \Magento\Framework\App\Config\ReinitableConfigInterface $storeConfig,
         \Magento\Sales\Model\OrderIncrementIdChecker $orderIncrementIdChecker,
         \M2E\M2ECloudMagentoConnector\Helper\Data\GlobalData $globalDataHelper,
-        \M2E\M2ECloudMagentoConnector\Model\Magento\Quote\ItemFactory $magentoQuoteItemFactory
+        \M2E\M2ECloudMagentoConnector\Model\Magento\Quote\ItemFactory $magentoQuoteItemFactory,
+        \M2E\M2ECloudMagentoConnector\Model\Magento\Quote\CustomerFinder $customerFinder
     ) {
         $this->proxyOrder = $proxyOrder;
         $this->currency = $currency;
@@ -44,6 +46,7 @@ class Builder
         $this->configuratorFactory = $configuratorFactory;
         $this->globalDataHelper = $globalDataHelper;
         $this->magentoQuoteItemFactory = $magentoQuoteItemFactory;
+        $this->customerFinder = $customerFinder;
     }
 
     public function __destruct()
@@ -125,8 +128,18 @@ class Builder
 
     //########################################
 
-    private function initializeCustomer()
+    private function initializeCustomer(): void
     {
+        $customer = $this->customerFinder->findByEmail(
+            $this->proxyOrder->getBuyerEmail(),
+            $this->proxyOrder->getStore()->getWebsiteId()
+        );
+        if ($customer !== null) {
+            $this->quote->setCustomer($customer);
+
+            return;
+        }
+
         $this->quote
             ->setCustomerId(null)
             ->setCustomerEmail($this->proxyOrder->getBuyerEmail())
