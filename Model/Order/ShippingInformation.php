@@ -55,4 +55,20 @@ class ShippingInformation extends \Magento\Framework\DataObject implements Shipp
     {
         return $this->setData(self::KEY_TRACKING_NUMBER, $trackingNumber);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingMethodDescription()
+    {
+        return $this->getData(self::KEY_SHIPPING_METHOD_DESCRIPTION);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingMethodDescription($shippingMethodDescription)
+    {
+        return $this->setData(self::KEY_SHIPPING_METHOD_DESCRIPTION, $shippingMethodDescription);
+    }
 }

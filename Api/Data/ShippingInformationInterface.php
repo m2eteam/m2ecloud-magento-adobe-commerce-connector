@@ -12,6 +12,7 @@ interface ShippingInformationInterface
     public const KEY_IS_SHIPPED = 'is_shipped';
     public const KEY_TRACKING_TITLE = 'tracking_title';
     public const KEY_TRACKING_NUMBER = 'tracking_number';
+    public const KEY_SHIPPING_METHOD_DESCRIPTION = 'shipping_method_description';
     /**#@-*/
 
     /**
@@ -58,4 +59,19 @@ interface ShippingInformationInterface
      * @return $this
      */
     public function setTrackingNumber($trackingNumber);
+
+    /**
+     * Get shipping method description
+     * @return string|null
+     */
+    public function getShippingMethodDescription();
+
+    /**
+     * Set shipping method description
+     *
+     * @param string|null $shippingMethodDescription
+     *
+     * @return $this
+     */
+    public function setShippingMethodDescription($shippingMethodDescription);
 }

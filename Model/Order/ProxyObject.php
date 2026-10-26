@@ -208,6 +208,12 @@ class ProxyObject
 
     public function getShippingData(): array
     {
+        $shippingMethod = $this->shipping->getShippingMethodCode();
+        $shippingInfo = $this->orderInformation->getShippingInformation();
+        if ($shippingInfo && !empty($shippingInfo->getShippingMethodDescription())) {
+            $shippingMethod .= ' ' . $shippingInfo->getShippingMethodDescription();
+        }
+
         return [
             'carrier_title' => (string)__(
                 '%channel_title Delivery Option',
@@ -215,7 +221,7 @@ class ProxyObject
                     'channel_title' => 'M2E Cloud Connector',
                 ],
             ),
-            'shipping_method' => $this->shipping->getShippingMethodCode(),
+            'shipping_method' => $shippingMethod,
             'shipping_price' => $this->getBaseShippingPrice(),
         ];
     }
